@@ -4,8 +4,9 @@ from PIL import Image
 from sklearn.model_selection import train_test_split
 
 # Paths
-TRAIN_DIR = 'data/raw/Training'
-TEST_DIR = 'data/raw/Testing'
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+TRAIN_DIR = os.path.join(BASE_DIR, 'data', 'raw', 'Training')
+TEST_DIR = os.path.join(BASE_DIR, 'data', 'raw', 'Testing')
 
 # Settings
 IMG_SIZE = (224, 224)
