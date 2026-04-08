@@ -13,16 +13,19 @@ CLASSES = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
 FIGURES_DIR = 'results/figures'
 
 
-def evaluate_model(model, X_test, y_test, experiment_name):
+def evaluate_model(model, test_ds, experiment_name):
     """
-    Evaluate a trained model on the test set.
+    Evaluate a trained model on the test dataset.
     Returns accuracy, macro F1, and saves confusion matrix.
     """
     print(f"\n=== Evaluating {experiment_name} ===")
 
     # Get predictions
-    y_pred_probs = model.predict(X_test, verbose=0)
+    y_pred_probs = model.predict(test_ds, verbose=0)
     y_pred = np.argmax(y_pred_probs, axis=1)
+
+    # Get true labels from dataset
+    y_test = np.concatenate([y for x, y in test_ds], axis=0)
 
     # Metrics
     accuracy = accuracy_score(y_test, y_pred)
